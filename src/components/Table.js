@@ -12,12 +12,14 @@ const Table = ({ PageSize, currentPage, setData, data }) => {
 
     const [openUpdate, setOpenUpdate] = useState(false);
     const [loading, setLoading] = useState(true)
+    const [findId, setFindId] = useState();
 
 
     //fetch data from api
     useEffect(() => {
         const fetchApi = async () => {
             setData(await getData())
+            localStorage.setItem('data', JSON.stringify(await getData()))
         }
         fetchApi()
         setLoading(false)
@@ -29,6 +31,7 @@ const Table = ({ PageSize, currentPage, setData, data }) => {
         const lastPageIndex = firstPageIndex + PageSize;
         return data.slice(firstPageIndex, lastPageIndex);
     }, [currentPage, data]);
+
 
 
 
@@ -63,7 +66,10 @@ const Table = ({ PageSize, currentPage, setData, data }) => {
                                 <td className='datagrid'>
                                     <button
                                         className="editeButton"
-                                        onClick={() => setOpenUpdate(true)}
+                                        onClick={() => {
+                                            setOpenUpdate(true);
+                                            setFindId(item.id)
+                                        }}
                                     >
                                         Edit
                                     </button>
@@ -81,7 +87,7 @@ const Table = ({ PageSize, currentPage, setData, data }) => {
                     })}
                 </tbody>
             </table>
-            {openUpdate && <Edit setOpenUpdate={setOpenUpdate} user={data} setData={setData} />}
+            {openUpdate && <Edit setOpenUpdate={setOpenUpdate} findId={findId} user={data} setData={setData} />}
         </>
     )
 }
