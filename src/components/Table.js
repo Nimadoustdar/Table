@@ -14,6 +14,10 @@ const Table = () => {
     const [data, setData] = useState([])
     const [currentPage, setCurrentPage] = useState(1);
     const [openUpdate, setOpenUpdate] = useState(false);
+<<<<<<< HEAD
+=======
+    const [loading, setLoading] = useState(true)
+>>>>>>> 26cb8b34675c7418dafcf324589821f0801dcbc6
     const [findId, setFindId] = useState();
 
 
@@ -31,6 +35,7 @@ const Table = () => {
         const lastPageIndex = firstPageIndex + PageSize;
         return data.slice(firstPageIndex, lastPageIndex);
     }, [currentPage, data]);
+
 
 
 
@@ -86,6 +91,7 @@ const Table = () => {
                     })}
                 </tbody>
             </table>
+<<<<<<< HEAD
 
             {openUpdate && <Edit setOpenUpdate={setOpenUpdate} findId={findId} user={data} setData={setData} />}
 
@@ -96,6 +102,9 @@ const Table = () => {
                 pageSize={PageSize}
                 onPageChange={page => setCurrentPage(page)}
             />
+=======
+            {openUpdate && <Edit setOpenUpdate={setOpenUpdate} findId={findId} user={data} setData={setData} />}
+>>>>>>> 26cb8b34675c7418dafcf324589821f0801dcbc6
         </>
     )
 }
