@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Navbar from './components/navber/Navbar';
+import Table from './components/Table';
+import Pagination from './Pagination';
+//Style
+import './style.scss';
+//data length
+let PageSize = 5;
 
-function App() {
+export default function App() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [data, setData] = useState([])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container'>
+      <Navbar />
+      <Table
+        currentPage={currentPage}
+        PageSize={PageSize}
+        data={data}
+        setData={setData}
+      />
+      <Pagination
+        className="pagination-bar"
+        currentPage={currentPage}
+        totalCount={data.length}
+        pageSize={PageSize}
+        onPageChange={page => setCurrentPage(page)}
+      />
     </div>
   );
 }
-
-export default App;
