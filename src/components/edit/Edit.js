@@ -1,9 +1,4 @@
-<<<<<<< HEAD
 import "./edit.scss";
-=======
-import { useEffect, useState } from "react";
-import "./update.scss";
->>>>>>> 26cb8b34675c7418dafcf324589821f0801dcbc6
 import { useImmer } from 'use-immer'
 import axios from "axios";
 
@@ -41,43 +36,12 @@ const Edit = ({ setOpenUpdate, user, setData, findId }) => {
         });
     }
 
-<<<<<<< HEAD
-
-    const handleFirstNameChange = (e) => {
-        updateInfo((draft) => {
-            draft.firstName = e.target.value;
-        });
-    }
-    const handleLastNameChange = (e) => {
-        updateInfo((draft) => {
-            draft.lastName = e.target.value;
-        });
-    }
-    const handleEmailChange = (e) => {
-        updateInfo((draft) => {
-            draft.email = e.target.value;
-        });
-    }
-    const handlePhoneChange = (e) => {
-        updateInfo((draft) => {
-            draft.phone = e.target.value;
-        });
-    }
-
-=======
->>>>>>> 26cb8b34675c7418dafcf324589821f0801dcbc6
-
 
     const handleClick = async (e) => {
         e.preventDefault();
         axios({
             method: 'put',
-<<<<<<< HEAD
-
             url: `https://639d89b81ec9c6657bac6730.mockapi.io/api/v1/users/${findId}`,
-=======
-            url: `https://639ef8747aaf11ceb88f363c.mockapi.io/users/${findId}`,
->>>>>>> 26cb8b34675c7418dafcf324589821f0801dcbc6
             data: {
                 first_name: info.firstName,
                 last_name: info.lastName,
@@ -85,10 +49,6 @@ const Edit = ({ setOpenUpdate, user, setData, findId }) => {
                 phone: info.phone,
             }
         }).then((res) => {
-<<<<<<< HEAD
-=======
-            console.log(res.data)
->>>>>>> 26cb8b34675c7418dafcf324589821f0801dcbc6
             setData(res.data)
             setOpenUpdate(false);
 
