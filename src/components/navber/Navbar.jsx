@@ -6,6 +6,7 @@ const Navbar = () => {
                 Table
             </h1>
         </div>
+
     )
 }
 

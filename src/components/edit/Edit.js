@@ -17,7 +17,7 @@ const Edit = ({ setOpenUpdate, user, setData, findId }) => {
         phone: user.phone,
     });
 
-    
+
 
     const handleFirstNameChange = (e) => {
         updateInfo((draft) => {
@@ -30,6 +30,7 @@ const Edit = ({ setOpenUpdate, user, setData, findId }) => {
         });
     }
     const handleEmailChange = (e) => {
+
         updateInfo((draft) => {
             draft.email = e.target.value;
         });

@@ -7,7 +7,6 @@ import Edit from "./edit/Edit";
 import { getData } from '../services/api';
 import Pagination from "./pagination/Pagination";
 
-
 const Table = () => {
     let PageSize = 10;
 
@@ -93,15 +92,15 @@ const Table = () => {
             </table>
 <<<<<<< HEAD
 
-            {openUpdate && <Edit setOpenUpdate={setOpenUpdate} findId={findId} user={data} setData={setData} />}
+    { openUpdate && <Edit setOpenUpdate={setOpenUpdate} findId={findId} user={data} setData={setData} /> }
 
-            <Pagination
-                className="pagination-bar"
-                currentPage={currentPage}
-                totalCount={data.length}
-                pageSize={PageSize}
-                onPageChange={page => setCurrentPage(page)}
-            />
+    <Pagination
+        className="pagination-bar"
+        currentPage={currentPage}
+        totalCount={data.length}
+        pageSize={PageSize}
+        onPageChange={page => setCurrentPage(page)}
+    />
 =======
             {openUpdate && <Edit setOpenUpdate={setOpenUpdate} findId={findId} user={data} setData={setData} />}
 >>>>>>> 26cb8b34675c7418dafcf324589821f0801dcbc6
