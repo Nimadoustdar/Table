@@ -1,26 +1,28 @@
 import { useEffect, useMemo, useState } from "react";
-//components
-import Edit from "./edit/Edit";
 //style
 import "./table.scss"
-import 'bootstrap/dist/css/bootstrap.min.css';
+
+import Edit from "./edit/Edit";
 //API
 import { getData } from '../services/api';
+import Pagination from "./pagination/Pagination";
 
 
-const Table = ({ PageSize, currentPage, setData, data }) => {
+const Table = () => {
+    let PageSize = 10;
 
+    const [data, setData] = useState([])
+    const [currentPage, setCurrentPage] = useState(1);
     const [openUpdate, setOpenUpdate] = useState(false);
-    const [loading, setLoading] = useState(true)
+    const [findId, setFindId] = useState();
 
 
-    //fetch data from api
     useEffect(() => {
         const fetchApi = async () => {
             setData(await getData())
+            localStorage.setItem('data', JSON.stringify(await getData()))
         }
         fetchApi()
-        setLoading(false)
     }, [])
 
 
@@ -51,7 +53,7 @@ const Table = ({ PageSize, currentPage, setData, data }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {loading ? <p>loading</p> : currentTableData.map(item => {
+                    {currentTableData.map(item => {
 
                         return (
                             <tr key={item.id}>
@@ -63,7 +65,10 @@ const Table = ({ PageSize, currentPage, setData, data }) => {
                                 <td className='datagrid'>
                                     <button
                                         className="editeButton"
-                                        onClick={() => setOpenUpdate(true)}
+                                        onClick={() => {
+                                            setOpenUpdate(true);
+                                            setFindId(item.id)
+                                        }}
                                     >
                                         Edit
                                     </button>
@@ -81,7 +86,16 @@ const Table = ({ PageSize, currentPage, setData, data }) => {
                     })}
                 </tbody>
             </table>
-            {openUpdate && <Edit setOpenUpdate={setOpenUpdate} user={data} setData={setData} />}
+
+            {openUpdate && <Edit setOpenUpdate={setOpenUpdate} findId={findId} user={data} setData={setData} />}
+
+            <Pagination
+                className="pagination-bar"
+                currentPage={currentPage}
+                totalCount={data.length}
+                pageSize={PageSize}
+                onPageChange={page => setCurrentPage(page)}
+            />
         </>
     )
 }

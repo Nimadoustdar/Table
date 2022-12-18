@@ -1,12 +1,16 @@
 .datatable {
-  height: 600px;
-  padding: 20px;
+  margin-bottom: 30px;
 
   .datatableTitle {
-    font-size: 18px;
+    font-size: 16px;
     color: gray;
   }
 
+  .datagrid {
+    font-size: 14px;
+    color: rgb(55, 55, 55);
+    padding: 10px 7px;
+  }
 
   .editeButton {
     padding: 2px 5px;
@@ -15,7 +19,6 @@
     border: 1px dotted rgba(0, 0, 139, 0.596);
     cursor: pointer;
     background-color: #fff;
-    cursor: pointer;
     transition: all 0.3s;
 
     &:hover {

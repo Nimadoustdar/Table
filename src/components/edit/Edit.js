@@ -1,10 +1,11 @@
-import { useState } from "react";
-import "./update.scss";
+import "./edit.scss";
 import { useImmer } from 'use-immer'
+import axios from "axios";
 
-const Edit = ({ setOpenUpdate, user, setData }) => {
 
-    const [texts, setTexts] = useState({
+const Edit = ({ setOpenUpdate, user, setData, findId }) => {
+
+    const [info, updateInfo] = useImmer({
         firstName: user.first_name,
         lastName: user.last_name,
         email: user.email,
@@ -12,14 +13,50 @@ const Edit = ({ setOpenUpdate, user, setData }) => {
     });
 
 
-    const handleChange = (e) => {
-        setData((prev) => ({ ...prev, [e.target.name]: [e.target.value] }));
-    };
+
+    const handleFirstNameChange = (e) => {
+        updateInfo((draft) => {
+            draft.firstName = e.target.value;
+        });
+    }
+    const handleLastNameChange = (e) => {
+        updateInfo((draft) => {
+            draft.lastName = e.target.value;
+        });
+    }
+    const handleEmailChange = (e) => {
+        updateInfo((draft) => {
+            draft.email = e.target.value;
+        });
+    }
+    const handlePhoneChange = (e) => {
+        updateInfo((draft) => {
+            draft.phone = e.target.value;
+        });
+    }
+
 
 
     const handleClick = async (e) => {
         e.preventDefault();
-        setOpenUpdate(false);
+        axios({
+            method: 'put',
+
+            url: `https://639d89b81ec9c6657bac6730.mockapi.io/api/v1/users/${findId}`,
+            data: {
+                first_name: info.firstName,
+                last_name: info.lastName,
+                email: info.email,
+                phone: info.phone,
+            }
+        }).then((res) => {
+            setData(res.data)
+            setOpenUpdate(false);
+
+        }).finally(() => {
+            // refresh the page
+            window.location.reload();
+        })
     }
     return (
         <div className="update">
@@ -29,30 +66,30 @@ const Edit = ({ setOpenUpdate, user, setData }) => {
                     <label>First Name</label>
                     <input
                         type="text"
-                        value={texts.firstName}
+                        value={info.firstName}
                         name="firstName"
-                        onChange={handleChange}
+                        onChange={handleFirstNameChange}
                     />
                     <label>Last Name</label>
                     <input
                         type="text"
-                        value={texts.lastName}
+                        value={info.lastName}
                         name="lastName"
-                        onChange={handleChange}
+                        onChange={handleLastNameChange}
                     />
                     <label>Email</label>
                     <input
                         type="text"
-                        value={texts.email}
+                        value={info.email}
                         name="email"
-                        onChange={handleChange}
+                        onChange={handleEmailChange}
                     />
                     <label>Phone</label>
                     <input
                         type="text"
                         name="phone"
-                        value={texts.phone}
-                        onChange={handleChange}
+                        value={info.phone}
+                        onChange={handlePhoneChange}
                     />
                     <button onClick={handleClick}>Update</button>
                 </form>

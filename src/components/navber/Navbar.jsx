@@ -2,7 +2,9 @@ import "./navbar.scss"
 const Navbar = () => {
     return (
         <div className='navbar'>
-             Table
+            <h1>
+                Table
+            </h1>
         </div>
     )
 }
